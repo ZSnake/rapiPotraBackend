@@ -1,21 +1,22 @@
 var mongoose = require('mongoose');
 
 var EventoSchema = new mongoose.Schema({
-  fecha : int,
+  nombre: String,
+  fecha : String,
   nombreLocal : String,
-  hora : int,
-  usuario : [{nombre: String, aceptado: boolean}],
+  hora : Number,
+  usuario : [{nombreUsuario: String, aceptado: Boolean}],
   equipo1 : String,
   equipo2 : String,
   logo1 : String,
   logo2 : String,
   video : String,
   imagen : String,
-  finalizado : boolean,
-  resultado1 : int,
-  resultado2 : int,
+  finalizado : Boolean,
+  resultado1 : Number,
+  resultado2 : Number,
   organizador : String,
-  resultadoGanador : boolean
+  resultadoGanador : Boolean
 });
 
 module.exports = mongoose.model('Evento', EventoSchema);

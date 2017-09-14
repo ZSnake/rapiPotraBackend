@@ -1,9 +1,11 @@
 var hapi = require('hapi');
 var inert = require('inert');
 var mongoose = require('mongoose');
-var routes = require('./routesUser');
-//var auth = require('hapi-auth-cookie');
 
+//var routes = require('./routes');
+var routesEvento = require('./routesEvento');
+var auth = require('hapi-auth-cookie');
+	
 var server = new hapi.Server();
 server.connection({
     port: process.env.PORT || 8000,
@@ -27,8 +29,13 @@ server.register([inert], function (err) {
     //     isSecure: false
     // });
 
-    server.route(routes.endpoints);
-    server.start(function () {
-        console.log('Server esta corriendo en:', server.info.uri);
-    });
+	server.route(routesEvento.endpoints);
+	server.start(function () {
+	    console.log('Server esta corriendo en:', server.info.uri);
+	});
+
+    //server.route(routes.endpoints);
+    //server.start(function () {
+      //  console.log('Server esta corriendo en:', server.info.uri);
+    //});
 });
