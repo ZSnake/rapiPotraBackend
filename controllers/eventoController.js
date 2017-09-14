@@ -44,7 +44,7 @@ exports.buscarEventoEquipo2 = {
 
 exports.buscarEventoFinalizado = {
   handler: function(request, reply){
-  var eventos = evento.find({finalizado:request.params.finalizado});
+  var eventos = evento.find({finalizado:true});
     reply(eventos);
   }
 }
