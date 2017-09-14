@@ -1,1 +1,0 @@
-var user = require('../schemas/user');

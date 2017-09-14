@@ -2,12 +2,6 @@ var user = require('../schemas/usuario');
 var boom = require('boom');
 var bcrypt = require('bcrypt');
 
-exports.getPrincipal = {
-    handler: function (request, reply) {
-        var user = user.find(request.body.nombreUsuario);
-        reply();
-    }
-}
 exports.getUsers = {
     handler: function (request, reply) {
         var users = user.find(request.query);
@@ -16,10 +10,10 @@ exports.getUsers = {
     }
 }
 exports.createUser = {
-    // auth: {
-    //   mode:'try',
-    //   strategy:'session'
-    // },
+    auth: {
+      mode:'try',
+      strategy:'session'
+    },
     handler: function (request, reply) {
         bcrypt.hash(request.payload.password, 10, function (err, hash) {
             if (err)
@@ -47,7 +41,25 @@ exports.createUser = {
             });
         })
     }
-};
+}
+
+exports.modifyUser = {
+  handler: function (request, reply) {
+    if (request.query.nombreUsuario) {
+      var socks = sock.find({ nombreUsuario: request.query.nombreUsuario });
+      socks.update({ $set: request.payload }, function (err) {
+        if (err) {
+          reply('no se edito');
+        } else {
+          reply('se edito con exito');
+        }
+      });
+    } else {
+      return reply("Ingresar un nombre");
+    }
+
+  }
+}
 
 exports.addFriend = {
     handler: function (request, reply) {
@@ -83,6 +95,17 @@ exports.deleteUser = {
           reply('deleted');
         }
       });
+    } else {
+      return reply("Ingresar un nombre");
+    }
+  }
+}
+
+exports.deleteAccount = {
+  handler: function (request, reply) {
+    if (request.query.nombreUsuario != undefined) {
+      var users = user.find({ nombreUsuario: request.query.nombreUsuario });
+      users.update({activo:false});
     } else {
       return reply("Ingresar un nombre");
     }
