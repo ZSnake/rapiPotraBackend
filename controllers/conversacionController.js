@@ -41,9 +41,6 @@ exports.modifyConversacion = {
   handler: function (request, reply) {
     if (request.query.user1) {
       var conversaciones = conversacion.find({ user1: request.query.user1, user2:request.query.user2 });
-      console.log(request.query.user1);
-      console.log(request.query.user2);
-      console.log(request.payload);
       conversaciones.update({ $set: request.payload }, function (err) {
         if (err) {
           reply('no se edito');
