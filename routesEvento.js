@@ -1,6 +1,6 @@
 var eventoController = require('./controllers/eventoController');
 
-exports.endpoints = [{method: 'GET', path: '/', config: {handler: function(request, reply){reply('API v1, Eventos')}}},
+exports.endpoints = [
 	{method: 'GET', path: '/v1/eventos', config: eventoController.buscarEventos},
 	{method: 'GET', path: '/v1/buscar/eventos/nombre/{nombre}', config: eventoController.buscarEventoNombre},
 	{method: 'GET', path: '/v1/buscar/eventos/fecha/{fecha}', config: eventoController.buscarEventoFecha},
