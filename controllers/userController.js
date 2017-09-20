@@ -10,10 +10,6 @@ exports.getUsers = {
     }
 }
 exports.createUser = {
-    auth: {
-      mode:'try',
-      strategy:'session'
-    },
     handler: function (request, reply) {
         bcrypt.hash(request.payload.password, 10, function (err, hash) {
             if (err)
@@ -31,7 +27,6 @@ exports.createUser = {
                 imagen: "",
                 activo: true
             });
-            console.log(newUser);
             newUser.save(function (err) {
                 if (err) {
                     return reply(boom.notAcceptable('Username must be unique: ' + err));
@@ -46,8 +41,8 @@ exports.createUser = {
 exports.modifyUser = {
   handler: function (request, reply) {
     if (request.query.nombreUsuario) {
-      var socks = sock.find({ nombreUsuario: request.query.nombreUsuario });
-      socks.update({ $set: request.payload }, function (err) {
+      var users = user.find({ nombreUsuario: request.query.nombreUsuario });
+      users.update({ $set: request.payload }, function (err) {
         if (err) {
           reply('no se edito');
         } else {

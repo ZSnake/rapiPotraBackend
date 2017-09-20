@@ -7,9 +7,11 @@ var routesEvento = require('./routesEvento');
 var routesUser = require('./routesUser');
 var routesAuth = require('./routesAuth');
 var routesConversacion = require('./routesConversacion');
+var routesLocal = require('./routesLocal')
 var routes = routesUser.endpoints.concat(routesEvento.endpoints);
 routes = routes.concat(routesAuth.endpoints);
 routes = routes.concat(routesConversacion.endpoints);
+routes = routes.concat(routesLocal.endpoints);
 
 var auth = require('hapi-auth-cookie');
 
@@ -45,13 +47,12 @@ server.register([inert, auth], function (err) {
             console.log('user disconnected');
         });
         socket.on('getMessage', function (msg) {
-            console.log('message: ' + msg);
-            socket.emit('getMessage',msg);
+            console.log('getMessage: ' + msg);
+            socket.send(msg);
         });
     });
     server.start(function () {
         console.log('Server esta corriendo en:', server.info.uri);
-
     });
 
 });
