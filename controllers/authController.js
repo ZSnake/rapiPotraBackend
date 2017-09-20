@@ -32,6 +32,8 @@ exports.login = {
               return reply(boom.unauthorized('Wrong password'))
             }
           });
+        }else{
+          return reply("usuario no existe");
         }
       });
     }
@@ -65,6 +67,8 @@ exports.loginLocal = {
               return reply(boom.unauthorized('Wrong password'))
             }
           });
+        }else{
+          return reply("usuario no existe");
         }
       });
     }
