@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
+var uniqueValidator = require('mongoose-unique-validator');
 
 var EventoSchema = new mongoose.Schema({
-  nombre: String,
+  nombre: {type: String, unique: true},
   fecha : String,
   nombreLocal : String,
   hora : Number,
@@ -19,4 +20,5 @@ var EventoSchema = new mongoose.Schema({
   resultadoGanador : Boolean
 });
 
+EventoSchema.plugin(uniqueValidator);
 module.exports = mongoose.model('Evento', EventoSchema);
