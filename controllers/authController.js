@@ -13,7 +13,6 @@ exports.login = {
       }
     },
     handler: function(request, reply) {
-      console.log(request.payload.password);
       user.find({nombreUsuario: request.payload.nombreUsuario}, function(err, user){
         console.log('nombreUsuario: ', request.payload.nombreUsuario, 'user', user)
         if(err)
