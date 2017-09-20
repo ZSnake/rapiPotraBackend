@@ -24,7 +24,7 @@ server.connection({
 
 var io = require('socket.io')(server.listener);
 
-mongoose.connect('mongodb://localhost:27017/RapiPotra');
+mongoose.connect('mongodb://mongodb://felix:felix@ds141534.mlab.com:41534/rapipotra');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Error al conectarse'));
